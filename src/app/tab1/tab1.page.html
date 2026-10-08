@@ -9,4 +9,10 @@
     heading="Nové počítadlo"
     (saved)="onSaved($event)"
   ></app-counter>
+  <ion-toast
+  [isOpen]="toastOpen"
+  [message]="toastMessage"
+  [duration]="2500"
+  (didDismiss)="toastOpen = false"
+></ion-toast>
 </ion-content>
