@@ -1,17 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   IonContent,
   IonHeader,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonListHeader,
-  IonNote,
   IonTitle,
   IonToolbar,
 } from '@ionic/angular';
 import { CounterComponent } from '../components/counter/counter.component';
 import { SavedCounter } from '../models/saved-counter';
+import { CounterService } from '../services/counter.service';
 
 @Component({
   selector: 'app-tab1',
@@ -21,19 +17,14 @@ import { SavedCounter } from '../models/saved-counter';
     CounterComponent,
     IonContent,
     IonHeader,
-    IonItem,
-    IonLabel,
-    IonList,
-    IonListHeader,
-    IonNote,
     IonTitle,
     IonToolbar,
   ],
 })
 export class Tab1Page {
-  savedCounters: SavedCounter[] = [];
+  private readonly counterService = inject(CounterService);
 
-  onSaved(counter: SavedCounter): void {
-    this.savedCounters.unshift(counter);
+  async onSaved(counter: SavedCounter): Promise<void> {
+    await this.counterService.add(counter);
   }
 }

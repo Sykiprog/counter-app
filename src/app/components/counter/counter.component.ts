@@ -51,12 +51,14 @@ export class CounterComponent {
     if (!name) {
       return;
     }
+    
 
     this.saved.emit({
-      id: crypto.randomUUID(),
-      name,
-      value: this.count,
-    });
+  id: crypto.randomUUID(),
+  name,
+  value: this.count,
+  createdAt: new Date().toISOString(),
+});
 
     this.counterName = '';
     this.count = 0;
